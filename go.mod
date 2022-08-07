@@ -1,4 +1,4 @@
-module algorithm
+module github.com/eneskzlcn/algorithm
 
 go 1.18
 

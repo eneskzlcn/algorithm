@@ -1,4 +1,4 @@
-package string
+package string_algorithms
 
 func removeLast(slice []int32) []int32 {
 	if len(slice) > 0 {

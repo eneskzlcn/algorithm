@@ -1,12 +1,12 @@
-package string
+package string_algorithms
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*LengthOfTheLongestSubstringWithoutRepeatingCharacters is a function that finds
 the length of the longest substring that not have repeating characters in given string
 Given a string s, find the length of the longest substring without repeating characters.
-
-
 */
 func LengthOfTheLongestSubstringWithoutRepeatingCharacters(s string) int {
 	fmt.Printf("\nDEBUG FOR String: %s \n", s)
@@ -25,7 +25,6 @@ func LengthOfTheLongestSubstringWithoutRepeatingCharacters(s string) int {
 		   continue with next possible substring.
 		*/
 		if start, isExist := charIndexMap[s[index]]; isExist {
-
 			if (index - start) > (longestSubstr.Finish - longestSubstr.Start) {
 				longestSubstr.Start = longestSubstr.Finish
 				longestSubstr.Finish = index
@@ -36,12 +35,27 @@ func LengthOfTheLongestSubstringWithoutRepeatingCharacters(s string) int {
 			charIndexMap[s[index]] = index
 			index += 1
 		}
-		fmt.Printf("Start: %d, Char: %c, Finish: %d, Index: %d \n", longestSubstr.Start, s[index-1], longestSubstr.Finish, index)
 	}
-	// that means string is ful of not repeated characters.
-	//if longestSubstr.Finish != len(s) {
-	//	longestSubstr.Finish = len(s) - 1
-	//	longestSubstr.Length = longestSubstr.Finish - longestSubstr.Start
-	//}
 	return longestSubstr.Finish - longestSubstr.Start
+}
+
+/*StrStr function returns -1 if given haystack string contains needle string,
+else returns the first occurrence index of needle string in haystack string.
+*/
+func StrStr(haystack string, needle string) int {
+	haystackLen := len(haystack)
+	needleLen := len(needle)
+
+	if haystackLen < needleLen {
+		return -1
+	}
+	index := 0
+	for index+needleLen <= haystackLen {
+		subStr := haystack[index : index+needleLen]
+		if subStr == needle {
+			return index
+		}
+		index += 1
+	}
+	return -1
 }

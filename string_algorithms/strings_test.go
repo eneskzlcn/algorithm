@@ -1,8 +1,8 @@
-package string_test
+package string_algorithms_test
 
 import (
-	stringAlgorithms "algorithm/string"
 	"fmt"
+	"github.com/eneskzlcn/algorithm/string_algorithms"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -31,7 +31,7 @@ func TestGivenStringThatContainsJustOpeningAndClosingBracketsThatClosesInCorrect
 		},
 	}
 	for _, test := range testCases {
-		result := stringAlgorithms.IsValid(test.Given)
+		result := string_algorithms.IsValid(test.Given)
 		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given string: %s", test.Given))
 	}
 }
