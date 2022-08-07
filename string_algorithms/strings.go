@@ -46,3 +46,30 @@ func IsValid(s string) bool {
 	}
 	return true
 }
+
+/*LengthOfLastWord takes a string as param that consist of spaces or letters only.
+It returns length of the last words (letters without spaces)
+*/
+func LengthOfLastWord(s string) int {
+	const whiteSpace uint8 = 32
+	lastIndex := len(s) - 1
+	for lastIndex >= 0 {
+		if s[lastIndex] == whiteSpace {
+			lastIndex -= 1
+		} else {
+			break
+		}
+	}
+	if lastIndex <= 0 {
+		return 1
+	}
+	firstIndex := lastIndex - 1
+	for firstIndex >= 0 {
+		if s[firstIndex] != whiteSpace {
+			firstIndex -= 1
+		} else {
+			return lastIndex - firstIndex
+		}
+	}
+	return lastIndex - firstIndex
+}

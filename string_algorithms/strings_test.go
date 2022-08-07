@@ -35,3 +35,33 @@ func TestGivenStringThatContainsJustOpeningAndClosingBracketsThatClosesInCorrect
 		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given string: %s", test.Given))
 	}
 }
+
+func TestGivenStringThatConsistOfLettersAndSpacesThenItShouldReturnTheLengthOfLastWordThatNotContainSpacesWhenLengthOfLastWordCalled(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected int
+	}
+	testCases := []testCase{
+		{
+			Given:    "Hello World",
+			Expected: 5,
+		},
+		{
+			Given:    "   fly me   to   the moon  ",
+			Expected: 4,
+		},
+		{
+			Given:    "luffy is still joyboy",
+			Expected: 6,
+		},
+		{
+			Given:    "a ",
+			Expected: 1,
+		},
+	}
+
+	for _, test := range testCases {
+		result := string_algorithms.LengthOfLastWord(test.Given)
+		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given string: %s", test.Given))
+	}
+}
