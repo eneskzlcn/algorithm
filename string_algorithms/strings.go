@@ -1,5 +1,12 @@
 package string_algorithms
 
+import (
+	"fmt"
+	stringUtils "github.com/eneskzlcn/utilities/string"
+	"strconv"
+	"strings"
+)
+
 func removeLast(slice []int32) []int32 {
 	if len(slice) > 0 {
 		slice = slice[:len(slice)-1]
@@ -72,4 +79,65 @@ func LengthOfLastWord(s string) int {
 		}
 	}
 	return lastIndex - firstIndex
+}
+
+/*AddBinary takes two strings as binary numbers like "1010", "1011" and
+returns their sum as binary string "10101"
+*/
+//func AddBinary(a string, b string) string {
+//	//overflow := 0
+//	//
+//	//aIndex := len(a) - 1
+//	//bIndex := len(b) - 1
+//	//step := 0
+//	//var binaryMapper = map[uint8]int{
+//	//	48: 0, 49: 1,
+//	//}
+//	//result := ""
+//	//for aIndex >= 0 || bIndex >= 0 {
+//	//	bValue := 0
+//	//	aValue := 0
+//	//	if bIndex >= 0 {
+//	//		bValue = binaryMapper[b[bIndex]] * int(math.Pow(2, float64(step)))
+//	//	}
+//	//	if aIndex >= 0 {
+//	//		aValue = binaryMapper[a[aIndex]] * int(math.Pow(2, float64(step)))
+//	//	}
+//	//	bit := aValue + bValue + overflow
+//	//
+//	//	result := fmt.Sprintf("%d%s", bit, result)
+//	//	overflow -= 1
+//	//}
+//	//return ""
+//	return ""
+//}
+
+/*AddBinary2 takes two strings as binary numbers like "1010", "1011" and
+returns their sum as binary string "10101"
+But not works for more than 64 bits.
+*/
+func AddBinary2(a string, b string) string {
+	fmt.Printf("A len %d", len(a))
+	aValue, _ := strconv.ParseInt(a, 2, 128)
+	bValue, _ := strconv.ParseInt(b, 2, 64)
+	result := strconv.FormatInt(aValue+bValue, 2)
+	return result
+}
+
+func IsPalindrome(s string) bool {
+	clearedS := stringUtils.StripNonAlphanumerics(s)
+	clearedS = strings.ToLower(clearedS)
+	if len(clearedS) == 0 { // accepts "" as palindrome
+		return true
+	}
+	start := 0
+	end := len(clearedS) - 1
+	for start < end {
+		if clearedS[start] != clearedS[end] {
+			return false
+		}
+		end--
+		start++
+	}
+	return true
 }
