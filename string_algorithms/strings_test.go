@@ -119,3 +119,39 @@ func TestGivenAlphanumericAndNonalphanumericMixedStringThenItShouldCleanNonalpha
 		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given string: %s", test.Given))
 	}
 }
+func TestGivenColumnNumberThenItShouldReturnCorrespendingNumberInEnglishAlphabetBaseNumberSystemWhenConvertToTitleCalled(t *testing.T) {
+	type testCase struct {
+		Given    int
+		Expected string
+	}
+	testCases := []testCase{
+		{
+			Given:    1,
+			Expected: "A",
+		},
+		{
+			Given:    26,
+			Expected: "Z",
+		},
+		{
+			Given:    25,
+			Expected: "Y",
+		},
+		{
+			Given:    27,
+			Expected: "AA",
+		},
+		{
+			Given:    28,
+			Expected: "AB",
+		},
+		{
+			Given:    701,
+			Expected: "ZY",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.ConvertToTitle(test.Given)
+		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given number: %d", test.Given))
+	}
+}

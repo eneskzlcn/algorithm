@@ -141,3 +141,28 @@ func IsPalindrome(s string) bool {
 	}
 	return true
 }
+
+/*ConvertToTitle
+Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+For example:
+A -> 1
+B -> 2
+C -> 3
+Z -> 26
+AA -> 27
+AB -> 28
+*/
+
+const CharA int = 65
+
+func ConvertToTitle(columnNumber int) string {
+	value := columnNumber
+	result := ""
+	for value > 0 {
+		bit := (value - 1) % 26 // 1
+		value = value - bit
+		value = (value - 1) / 26
+		result = fmt.Sprintf("%c", int32(bit+CharA)) + result
+	}
+	return result
+}
