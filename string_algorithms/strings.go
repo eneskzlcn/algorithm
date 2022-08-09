@@ -48,10 +48,7 @@ func IsValid(s string) bool {
 			stack = append(stack, char)
 		}
 	}
-	if len(stack) > 0 {
-		return false
-	}
-	return true
+	return len(stack) <= 0
 }
 
 /*LengthOfLastWord takes a string as param that consist of spaces or letters only.
@@ -118,7 +115,7 @@ But not works for more than 64 bits.
 */
 func AddBinary2(a string, b string) string {
 	fmt.Printf("A len %d", len(a))
-	aValue, _ := strconv.ParseInt(a, 2, 128)
+	aValue, _ := strconv.ParseInt(a, 2, 64)
 	bValue, _ := strconv.ParseInt(b, 2, 64)
 	result := strconv.FormatInt(aValue+bValue, 2)
 	return result

@@ -40,7 +40,7 @@ func TestGivenStringThenItShouldReturnTheLengthOfTheLongestSubstringWhenLengthOf
 	}
 	for _, test := range testCases {
 		length := string_algorithms.LengthOfTheLongestSubstringWithoutRepeatingCharacters(test.Given)
-		assert.Equal(t, test.Expected, length, fmt.Sprintf("%s", test.Given))
+		assert.Equal(t, test.Expected, length, test.Given)
 	}
 }
 
