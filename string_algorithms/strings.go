@@ -162,14 +162,6 @@ func ConvertToTitle(columnNumber int) string {
 	return result
 }
 
-//func TitleToNumber(columnTitle string) int {
-//	result := 0
-//	index := len(columnTitle) - 1
-//	for i := index; i >= 0; i-- {
-//
-//	}
-//}
-
 /*IsIsomorphic Given two strings s and t, determine if they are isomorphic.
 
 Two strings s and t are isomorphic if the characters in s can be replaced to get t.
@@ -202,4 +194,88 @@ func IsIsomorphic(s string, t string) bool {
 		}
 	}
 	return true
+}
+
+/*IsAnagram
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
+typically using all the original letters exactly once.
+Constraints:
+- 1 <= s.length, t.length <= 5 * 104
+- s and t consist of lowercase English letters.
+From https://leetcode.com/problems/valid-anagram/
+*/
+func IsAnagram(s string, t string) bool {
+	charOccurrencesS := make(map[int32]int, 0)
+	for _, char := range s {
+		charOccurrencesS[char] += 1
+	}
+	for _, char := range t {
+		if value, isExist := charOccurrencesS[char]; isExist {
+			if value <= 0 {
+				return false
+			} else {
+				charOccurrencesS[char] -= 1
+			}
+		} else {
+			return false
+		}
+	}
+	for _, value := range charOccurrencesS {
+		if value != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+/*DefangIPaddr
+Given a valid (IPv4) IP address, return a defanged version of that IP address.
+
+A defanged IP address replaces every period "." with "[.]".
+
+Constraints:
+- The given address is a valid IPv4 address.
+*/
+func DefangIPaddr(address string) string {
+	result := ""
+	for _, char := range address {
+		if char == '.' {
+			result = result + "[.]"
+		} else {
+			result = result + string(char)
+		}
+	}
+	return result
+}
+
+/*FinalValueAfterOperations
+There is a programming language with only four operations and one variable X:
+
+++X and X++ increments the value of the variable X by 1.
+--X and X-- decrements the value of the variable X by 1.
+Initially, the value of X is 0.
+
+Given an array of strings operations containing a list of operations,
+return the final value of X after performing all the operations.
+
+Constraints:
+- 1 <= operations.length <= 100
+- operations[i] will be either "++X", "X++", "--X", or "X--"
+
+From https://leetcode.com/problems/final-value-of-variable-after-performing-operations/
+*/
+func FinalValueAfterOperations(operations []string) int {
+	result := 0
+	valueMap := map[uint8]int{
+		'-': -1,
+		'X': 0,
+		'+': 1,
+	}
+	for _, str := range operations {
+		result += valueMap[str[0]]
+		result += valueMap[str[2]]
+	}
+	return result
 }

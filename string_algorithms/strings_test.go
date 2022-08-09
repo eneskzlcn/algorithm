@@ -199,3 +199,76 @@ func TestIsIsomorphic(t *testing.T) {
 		}
 	})
 }
+
+func TestIsAnagram(t *testing.T) {
+	type testCase struct {
+		GivenS   string
+		GivenT   string
+		Expected bool
+	}
+	testCases := []testCase{
+		{
+			GivenS:   "anagram",
+			GivenT:   "nagaram",
+			Expected: true,
+		},
+		{
+			GivenS:   "word",
+			GivenT:   "drow",
+			Expected: true,
+		},
+		{
+			GivenS:   "rat",
+			GivenT:   "car",
+			Expected: false,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.IsAnagram(test.GivenS, test.GivenT)
+		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given S: %s, Given T: %s", test.GivenS, test.GivenT))
+	}
+}
+func TestDefangIPaddr(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected string
+	}
+	testCases := []testCase{
+		{
+			Given:    "1.1.1.1",
+			Expected: "1[.]1[.]1[.]1",
+		},
+		{
+			Given:    "255.100.50.0",
+			Expected: "255[.]100[.]50[.]0",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.DefangIPaddr(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
+func TestFinalValueAfterOperations(t *testing.T) {
+	type testCase struct {
+		Given    []string
+		Expected int
+	}
+	testCases := []testCase{
+		{
+			Given:    []string{"--X", "X++", "X++"},
+			Expected: 1,
+		},
+		{
+			Given:    []string{"++X", "++X", "X++"},
+			Expected: 3,
+		},
+		{
+			Given:    []string{"X++", "++X", "--X+", "X--"},
+			Expected: 0,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.FinalValueAfterOperations(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
