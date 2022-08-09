@@ -152,17 +152,57 @@ Z -> 26
 AA -> 27
 AB -> 28
 */
-
-const CharA int = 65
-
 func ConvertToTitle(columnNumber int) string {
+	//ASCII CHAR 'A' DECIMAL VALUE = 65
 	value := columnNumber
 	result := ""
 	for value > 0 {
 		bit := (value - 1) % 26 // 1
 		value = value - bit
 		value = (value - 1) / 26
-		result = fmt.Sprintf("%c", int32(bit+CharA)) + result
+		result = fmt.Sprintf("%c", int32(bit+65)) + result
 	}
 	return result
+}
+
+//func TitleToNumber(columnTitle string) int {
+//	result := 0
+//	index := len(columnTitle) - 1
+//	for i := index; i >= 0; i-- {
+//
+//	}
+//}
+
+/*IsIsomorphic Given two strings s and t, determine if they are isomorphic.
+
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving
+the order of characters. No two characters may map to the same character, but a character may map to itself.
+
+Constraints:
+- 1 <= s.length <= 5 * 104
+- t.length == s.length
+- s and t consist of any valid ascii character.
+
+From https://leetcode.com/problems/isomorphic-strings/
+*/
+func IsIsomorphic(s string, t string) bool {
+	charTransformationMap := make(map[int32]int32, 0)
+	for index, char := range s {
+		toValue := int32(t[index])
+		if value, isExist := charTransformationMap[char]; isExist {
+			if value != toValue {
+				return false
+			}
+		} else {
+			for _, val := range charTransformationMap {
+				if val == toValue {
+					return false
+				}
+			}
+			charTransformationMap[char] = toValue
+		}
+	}
+	return true
 }

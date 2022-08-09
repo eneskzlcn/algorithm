@@ -155,3 +155,47 @@ func TestGivenColumnNumberThenItShouldReturnCorrespendingNumberInEnglishAlphabet
 		assert.Equal(t, test.Expected, result, fmt.Sprintf("Given number: %d", test.Given))
 	}
 }
+
+func TestIsIsomorphic(t *testing.T) {
+	type testCase struct {
+		GivenS   string
+		GivenT   string
+		Expected bool
+	}
+	t.Run("Given two non-isomorphic strings then it should return false when IsIsomorphic called.", func(t *testing.T) {
+		testCases := []testCase{
+			{
+				GivenS:   "foo",
+				GivenT:   "bar",
+				Expected: false,
+			},
+			{
+				GivenS:   "fasaa",
+				GivenT:   "blmkk",
+				Expected: false,
+			},
+		}
+		for _, test := range testCases {
+			result := string_algorithms.IsIsomorphic(test.GivenS, test.GivenT)
+			assert.Equal(t, test.Expected, result, fmt.Sprintf("Given S: %s, Given T: %s", test.GivenS, test.GivenT))
+		}
+	})
+	t.Run("Given two isomorphic strings then it should return true when IsIsomorphic called.", func(t *testing.T) {
+		testCases := []testCase{
+			{
+				GivenS:   "egg",
+				GivenT:   "add",
+				Expected: true,
+			},
+			{
+				GivenS:   "paper",
+				GivenT:   "title",
+				Expected: true,
+			},
+		}
+		for _, test := range testCases {
+			result := string_algorithms.IsIsomorphic(test.GivenS, test.GivenT)
+			assert.Equal(t, test.Expected, result, fmt.Sprintf("Given S: %s, Given T: %s", test.GivenS, test.GivenT))
+		}
+	})
+}
