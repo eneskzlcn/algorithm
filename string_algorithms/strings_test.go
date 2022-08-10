@@ -272,3 +272,27 @@ func TestFinalValueAfterOperations(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+func TestMinPartitions(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected int
+	}
+	testCases := []testCase{
+		{
+			Given:    "32",
+			Expected: 3,
+		},
+		{
+			Given:    "82734",
+			Expected: 8,
+		},
+		{
+			Given:    "27346209830709182346",
+			Expected: 9,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.MinPartitions(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
