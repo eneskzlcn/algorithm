@@ -6,6 +6,8 @@ i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
 
 Constraints:
 - 0 <= n <= 105
+
+From https://leetcode.com/problems/counting-bits/
 */
 func CountBits(n int) []int {
 	if n == 0 {
@@ -29,3 +31,20 @@ func CountBits(n int) []int {
 	}
 	return result
 }
+
+/*PascalTriangle algorithm generates a pascal triangle as array representation from given number.
+Given an integer numRows, return the first numRows of Pascal's triangle.
+
+In Pascal's triangle, each number is the sum of the two numbers above.
+
+Constraints:
+
+- 1 <= numRows <= 30
+From https://leetcode.com/problems/pascals-triangle/
+*/
+//func PascalTriangle(numRows int) [][]int {
+//
+//}
+//func generateRow(number int, result [][]int) {
+//
+//}

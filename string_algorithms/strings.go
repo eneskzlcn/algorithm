@@ -294,6 +294,7 @@ Constraints:
 
 From https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/
 */
+
 func MinPartitions(n string) int {
 	maxDigit := '0'
 	for _, char := range n {
@@ -302,4 +303,40 @@ func MinPartitions(n string) int {
 		}
 	}
 	return int(maxDigit - 48)
+}
+
+/*MinOperations
+You have n boxes. You are given a binary string boxes of length n, where boxes[i] is '0' if
+the ith box is empty, and '1' if it contains one ball.
+In one operation, you can move one ball from a box to an adjacent box.
+Box i is adjacent to box j if abs(i - j) == 1. Note that after doing so, there may be more than one ball in some boxes.
+Return an array answer of size n, where answer[i] is the minimum number of operations
+needed to move all the balls to the ith box.
+Each answer[i] is calculated considering the initial state of the boxes.
+
+Constraints:
+
+- n == boxes.length
+- 1 <= n <= 2000
+- boxes[i] is either '0' or '1'.
+*/
+func MinOperations(boxes string) []int {
+	result := make([]int, len(boxes))
+	index := 0
+	for index < len(boxes) {
+		val := int(boxes[index] - '0')
+		i := index - 1
+		for i >= 0 {
+			result[i] = result[i] + (val * (index - i))
+			i--
+		}
+
+		j := index + 1
+		for j < len(boxes) {
+			result[j] = result[j] + (val * (j - index))
+			j++
+		}
+		index += 1
+	}
+	return result
 }

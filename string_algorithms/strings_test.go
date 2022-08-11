@@ -296,3 +296,24 @@ func TestMinPartitions(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestMinOperations(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected []int
+	}
+	testCases := []testCase{
+		{
+			Given:    "110",
+			Expected: []int{1, 1, 3},
+		},
+		{
+			Given:    "001011",
+			Expected: []int{11, 8, 5, 4, 3, 4},
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.MinOperations(test.Given)
+		assert.ElementsMatch(t, test.Expected, result)
+	}
+}
