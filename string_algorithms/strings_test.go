@@ -414,3 +414,27 @@ func TestGoalParserInterpretation(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestRestoreString(t *testing.T) {
+	type testCase struct {
+		GivenS       string
+		GivenIndices []int
+		Expected     string
+	}
+	testCases := []testCase{
+		{
+			GivenS:       "codeleet",
+			GivenIndices: []int{4, 5, 6, 7, 0, 2, 1, 3},
+			Expected:     "leetcode",
+		},
+		{
+			GivenS:       "abc",
+			GivenIndices: []int{0, 1, 2},
+			Expected:     "abc",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.RestoreString(test.GivenS, test.GivenIndices)
+		assert.Equal(t, test.Expected, result)
+	}
+}

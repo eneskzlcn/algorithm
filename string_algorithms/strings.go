@@ -454,3 +454,25 @@ func GoalParserInterpretation(command string) string {
 	}
 	return goalParsedResult
 }
+
+/*RestoreString
+You are given a string s and an integer array indices
+of the same length. The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled string.
+
+Return the shuffled string.
+
+Constraints:
+
+	s.length == indices.length == n
+	1 <= n <= 100
+	s consists of only lowercase English letters.
+	0 <= indices[i] < n
+	All values of indices are unique.
+*/
+func RestoreString(s string, indices []int) string {
+	a := []uint8(s)
+	for i := 0; i < len(s); i++ {
+		a[indices[i]] = s[i]
+	}
+	return string(a)
+}
