@@ -365,3 +365,27 @@ func TestMostWordsFound(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestNumJewelsInStones(t *testing.T) {
+	type testCase struct {
+		GivenJewels string
+		GivenStones string
+		Expected    int
+	}
+	testCases := []testCase{
+		{
+			GivenJewels: "aA",
+			GivenStones: "aAAbbbb",
+			Expected:    3,
+		},
+		{
+			GivenJewels: "z",
+			GivenStones: "ZZ",
+			Expected:    0,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.NumJewelsInStones(test.GivenJewels, test.GivenStones)
+		assert.Equal(t, test.Expected, result)
+	}
+}
