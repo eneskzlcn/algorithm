@@ -340,3 +340,75 @@ func MinOperations(boxes string) []int {
 	}
 	return result
 }
+
+/*ExecuteInstructions
+There is an n x n grid, with the top-left cell at (0, 0) and the bottom-right cell at (n - 1, n - 1).
+You are given the integer n and an integer array startPos where startPos = [startrow, startcol] indicates
+that a robot is initially at cell (startrow, startcol).
+You are also given a 0-indexed string s of length m where s[i] is the ith instruction for the
+robot: 'L' (move left), 'R' (move right), 'U' (move up), and 'D' (move down).
+The robot can begin executing from any ith instruction in s. It executes the
+instructions one by one towards the end of s but it stops if either of these conditions is met:
+The next instruction will move the robot off the grid.
+There are no more instructions left to execute.
+Return an array answer of length m where answer[i] is the number of instructions
+the robot can execute if the robot begins executing from the ith instruction in s.
+*/
+func ExecuteInstructions(n int, startPos []int, s string) []int {
+	type coord struct {
+		X int
+		Y int
+	}
+	charCoordMap := map[uint8]coord{
+		'R': {X: 1, Y: 0},
+		'D': {X: 0, Y: 1},
+		'L': {X: -1, Y: 0},
+		'U': {X: 0, Y: -1},
+	}
+	cumulativeCords := make([]coord, len(s))
+
+	cumulativeCords[len(s)-1].X = charCoordMap[s[len(s)-1]].X + startPos[0]
+	cumulativeCords[len(s)-1].Y = charCoordMap[s[len(s)-1]].Y + startPos[1]
+	fmt.Println(s)
+	fmt.Printf("Start Pos X: %d , Y: %d \n", startPos[0], startPos[1])
+	fmt.Printf("%d'th AA Coords X: %d , Y: %d\n", len(s)-1, cumulativeCords[len(s)-1].X, cumulativeCords[len(s)-1].Y)
+	for i := len(s) - 2; i >= 0; i-- {
+		move := charCoordMap[s[i]]
+		cumulativeCords[i].X = cumulativeCords[i+1].X + move.X
+		cumulativeCords[i].Y = cumulativeCords[i+1].Y + move.Y
+		fmt.Printf("%d'th Coords X: %d , Y: %d\n", i, cumulativeCords[i].X, cumulativeCords[i].Y)
+	}
+	result := make([]int, len(cumulativeCords))
+	for i := 0; i < len(cumulativeCords); i++ {
+		if cumulativeCords[i].X >= 0 && cumulativeCords[i].X < n &&
+			cumulativeCords[i].Y >= 0 && cumulativeCords[i].Y < n {
+			result[i] = len(cumulativeCords) - i
+			fmt.Printf("%d'th Result %d \n", i, result[i])
+		}
+	}
+	return nil
+}
+
+/*MostWordsFound
+A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
+
+You are given an array of strings sentences, where each sentences[i] represents a single sentence.
+
+Return the maximum number of words that appear in a single sentence.
+
+Constraints:
+	- 1 <= sentences.length <= 100
+	- 1 <= sentences[i].length <= 100
+	- sentences[i] consists only of lowercase English letters and ' ' only.
+	- sentences[i] does not have leading or trailing spaces.
+	- All the words in sentences[i] are separated by a single space.
+*/
+func MostWordsFound(sentences []string) int {
+	mostWordsFound := 0
+	for _, sentence := range sentences {
+		if a := len(strings.Split(sentence, " ")); a > mostWordsFound {
+			mostWordsFound = a
+		}
+	}
+	return mostWordsFound
+}

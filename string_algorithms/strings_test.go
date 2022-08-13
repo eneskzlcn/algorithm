@@ -317,3 +317,51 @@ func TestMinOperations(t *testing.T) {
 		assert.ElementsMatch(t, test.Expected, result)
 	}
 }
+
+func TestExecuteInstructions(t *testing.T) {
+	type testCase struct {
+		GivenN        int
+		GivenS        string
+		GivenStartPos []int
+		Expected      []int
+	}
+	testCases := []testCase{
+		{
+			GivenN:        3,
+			GivenS:        "RRDDLU",
+			GivenStartPos: []int{0, 1},
+			Expected:      []int{1, 5, 4, 3, 1, 0},
+		},
+		{
+			GivenN:        2,
+			GivenS:        "LURD",
+			GivenStartPos: []int{1, 1},
+			Expected:      []int{4, 1, 0, 0},
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.ExecuteInstructions(test.GivenN, test.GivenStartPos, test.GivenS)
+		assert.ElementsMatch(t, test.Expected, result)
+	}
+}
+
+func TestMostWordsFound(t *testing.T) {
+	type testCase struct {
+		Given    []string
+		Expected int
+	}
+	testCases := []testCase{
+		{
+			Given:    []string{"alice and bob love leetcode", "i think so too", "this is great thanks very much"},
+			Expected: 6,
+		},
+		{
+			Given:    []string{"please wait", "continue to fight", "continue to win"},
+			Expected: 3,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.MostWordsFound(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
