@@ -437,3 +437,20 @@ func NumJewelsInStones(jewels string, stones string) int {
 	}
 	return jewelsCount
 }
+func GoalParserInterpretation(command string) string {
+	i := 0
+	goalParsedResult := ""
+	for i < len(command) {
+		if command[i] == 'G' {
+			goalParsedResult += "G"
+			i += 1
+		} else if command[i] == '(' && (i+1 < len(command) && command[i+1] == ')') {
+			goalParsedResult += "o"
+			i += 2
+		} else if command[i] == '(' && (i+3 < len(command)) && command[i+1] == 'a' && command[i+2] == 'l' && command[i+3] == ')' {
+			goalParsedResult += "al"
+			i += 4
+		}
+	}
+	return goalParsedResult
+}

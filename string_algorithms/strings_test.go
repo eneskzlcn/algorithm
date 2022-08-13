@@ -389,3 +389,28 @@ func TestNumJewelsInStones(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestGoalParserInterpretation(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected string
+	}
+	testCases := []testCase{
+		{
+			Given:    "G()(al)",
+			Expected: "Goal",
+		},
+		{
+			Given:    "G()()()()(al)",
+			Expected: "Gooooal",
+		},
+		{
+			Given:    "(al)G(al)()()G",
+			Expected: "alGalooG",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.GoalParserInterpretation(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
