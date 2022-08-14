@@ -459,3 +459,24 @@ func TestCellsInRange(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestReverseWords(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected string
+	}
+	testCases := []testCase{
+		{
+			Given:    "Let's take LeetCode contest",
+			Expected: "s'teL ekat edoCteeL tsetnoc",
+		},
+		{
+			Given:    "God Ding",
+			Expected: "doG gniD",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.ReverseWords(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}

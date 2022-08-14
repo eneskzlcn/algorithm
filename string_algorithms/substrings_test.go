@@ -67,3 +67,28 @@ func TestGivenHaystackThatContainsNeedleThenItShouldReturnTheFirstOccurrenceInde
 		assert.Equal(t, test.Expected, result, fmt.Sprintf("Haystack: %s, Needle: %s", test.Haystack, test.Needle))
 	}
 }
+
+func TestBalancedStringSplit(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected int
+	}
+	testCases := []testCase{
+		{
+			Given:    "RLRRLLRLRL",
+			Expected: 4,
+		},
+		{
+			Given:    "RLRRRLLRLL",
+			Expected: 2,
+		},
+		{
+			Given:    "LLLLRRRR",
+			Expected: 1,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.BalancedStringSplit(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
