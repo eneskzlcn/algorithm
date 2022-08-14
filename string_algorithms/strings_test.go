@@ -438,3 +438,24 @@ func TestRestoreString(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestCellsInRange(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected []string
+	}
+	testCases := []testCase{
+		{
+			Given:    "K1:L2",
+			Expected: []string{"K1", "K2", "L1", "L2"},
+		},
+		{
+			Given:    "A1:F1",
+			Expected: []string{"A1", "B1", "C1", "D1", "E1", "F1"},
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.CellsInRange(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
