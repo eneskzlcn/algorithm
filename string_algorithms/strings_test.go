@@ -480,3 +480,23 @@ func TestReverseWords(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+func TestSortSentence(t *testing.T) {
+	type testCase struct {
+		Given    string
+		Expected string
+	}
+	testCases := []testCase{
+		{
+			Given:    "is2 sentence4 This1 a3",
+			Expected: "This is a sentence",
+		},
+		{
+			Given:    "Myself2 Me1 I4 and3",
+			Expected: "Me Myself and I",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.SortSentence(test.Given)
+		assert.Equal(t, test.Expected, result)
+	}
+}
