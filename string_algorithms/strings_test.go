@@ -500,3 +500,37 @@ func TestSortSentence(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+func TestCountMatches(t *testing.T) {
+	type testCase struct {
+		GivenRuleValue string
+		GivenRuleKey   string
+		GivenItems     [][]string
+		Expected       int
+	}
+	testCases := []testCase{
+		{
+			GivenRuleValue: "silver",
+			GivenRuleKey:   "color",
+			GivenItems: [][]string{
+				{"phone", "blue", "pixel"},
+				{"computer", "silver", "lenovo"},
+				{"phone", "gold", "iphone"},
+			},
+			Expected: 1,
+		},
+		{
+			GivenRuleValue: "phone",
+			GivenRuleKey:   "type",
+			GivenItems: [][]string{
+				{"phone", "blue", "pixel"},
+				{"computer", "silver", "phone"},
+				{"phone", "gold", "iphone"},
+			},
+			Expected: 2,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.CountMatches(test.GivenItems, test.GivenRuleKey, test.GivenRuleValue)
+		assert.Equal(t, test.Expected, result)
+	}
+}
