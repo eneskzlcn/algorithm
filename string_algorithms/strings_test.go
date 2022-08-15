@@ -563,3 +563,26 @@ func TestMinMovesToSeat(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+func TestDecodeMessage(t *testing.T) {
+	type testCase struct {
+		GivenKey     string
+		GivenMessage string
+		Expected     string
+	}
+	testCases := []testCase{
+		{
+			GivenKey:     "the quick brown fox jumps over the lazy dog",
+			GivenMessage: "vkbs bs t suepuv",
+			Expected:     "this is a secret",
+		},
+		{
+			GivenKey:     "eljuxhpwnyrdgtqkviszcfmabo",
+			GivenMessage: "zwx hnfx lqantp mnoeius ycgk vcnjrdb",
+			Expected:     "the five boxing wizards jump quickly",
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.DecodeMessage(test.GivenKey, test.GivenMessage)
+		assert.Equal(t, test.Expected, result)
+	}
+}
