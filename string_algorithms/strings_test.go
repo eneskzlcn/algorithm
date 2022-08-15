@@ -534,3 +534,32 @@ func TestCountMatches(t *testing.T) {
 		assert.Equal(t, test.Expected, result)
 	}
 }
+
+func TestMinMovesToSeat(t *testing.T) {
+	type testCase struct {
+		GivenSeats    []int
+		GivenStudents []int
+		Expected      int
+	}
+	testCases := []testCase{
+		{
+			GivenSeats:    []int{3, 1, 5},
+			GivenStudents: []int{2, 7, 4},
+			Expected:      4,
+		},
+		{
+			GivenSeats:    []int{4, 1, 5, 9},
+			GivenStudents: []int{1, 3, 2, 6},
+			Expected:      7,
+		},
+		{
+			GivenSeats:    []int{2, 2, 6, 6},
+			GivenStudents: []int{1, 3, 2, 6},
+			Expected:      4,
+		},
+	}
+	for _, test := range testCases {
+		result := string_algorithms.MinMovesToSeat(test.GivenSeats, test.GivenStudents)
+		assert.Equal(t, test.Expected, result)
+	}
+}
